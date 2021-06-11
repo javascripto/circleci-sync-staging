@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  sync-staging-with-master:
+    docker:
+    - image: circleci/node:12.14.1-browsers
+    steps:
+      - checkout
+      - run:
+          name: Sync branches (master -> staging)
+          command: |
+            ORG=$ORGNAME
+            TOKEN=$GITHUB_PUSH_TOKEN
+            REPO_NAME=$CIRCLE_PROJECT_REPONAME
+
+            if [ "$CIRCLE_BRANCH" = "master" ]; then
+              if git show-ref --verify --quiet "refs/heads/staging"; then
+                git branch -D staging 
+              fi
+              git checkout -b staging
+              git remote set-url origin https://$TOKEN@github.com/$ORG/$REPO_NAME.git
+              git push origin staging
+            fi
+
+workflows:
+  version: 2
+  sample: 
+    jobs:
+      - sync-staging-with-master
