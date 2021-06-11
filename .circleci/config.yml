@@ -10,7 +10,7 @@ jobs:
           name: Sync branches (master -> staging)
           command: |
             ORG=$ORGNAME
-            TOKEN=$GITHUB_PUSH_TOKEN
+            TOKEN=$GITHUB_TOKEN
             REPO_NAME=$CIRCLE_PROJECT_REPONAME
 
             if [ "$CIRCLE_BRANCH" = "master" ]; then
