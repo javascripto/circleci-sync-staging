@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Sync branches (master -> staging)
           command: |
-            ORG=$ORGNAME
+            ORG=javascripto
             TOKEN=$GITHUB_TOKEN
             REPO_NAME=$CIRCLE_PROJECT_REPONAME
 
@@ -21,7 +21,7 @@ jobs:
               git remote set-url origin https://$TOKEN@github.com/$ORG/$REPO_NAME.git
               git push origin staging
             fi
-
+            echo "repositoryURL=$CIRCLE_REPOSITORY_URL"
 workflows:
   version: 2
   sample: 
