@@ -10,12 +10,13 @@ jobs:
       - run:
           name: Sync branches (master -> staging)
           command: |
+            NEW_ORIGIN="https://$GITHUB_TOKEN@github.com/${CIRCLE_REPOSITORY_URL/git@github.com:}"
             if [ "$CIRCLE_BRANCH" = "master" ]; then
               if git show-ref --verify --quiet "refs/heads/staging"; then
                 git branch -D staging 
               fi
               git checkout -b staging
-              git remote set-url origin ${CIRCLE_REPOSITORY_URL/git/$GITHUB_TOKEN}
+              git remote set-url origin $NEW_ORIGIN
               git push origin staging
             fi
 workflows:
