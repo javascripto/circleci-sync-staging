@@ -21,6 +21,10 @@ jobs:
             fi
 workflows:
   version: 2
-  sync-branches: 
+  sync-branches:
     jobs:
-      - sync-staging-with-master
+      - sync-staging-with-master:
+          filters:
+            branches:
+              only:
+                - master
