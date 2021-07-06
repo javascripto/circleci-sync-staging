@@ -24,7 +24,4 @@ workflows:
   sync-branches:
     jobs:
       - sync-staging-with-master:
-          filters:
-            branches:
-              only:
-                - master
+          filters: { branches: { only: master } }
